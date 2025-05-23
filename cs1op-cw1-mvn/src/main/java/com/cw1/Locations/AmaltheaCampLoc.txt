@@ -1,0 +1,26 @@
+Amalthea:Camp
+6
+1
+AirLock
+4
+3
+Corridor
+3 0 3
+3
+Security
+0 0 0
+3
+Command
+3 2 0
+2
+Electricity
+0 1
+3
+Office
+3 0 8
+0 1 0 0 0 0
+3 0 1 0 0 0
+0 3 0 1 2 0
+0 0 3 0 0 4
+0 0 4 0 0 0
+0 0 0 2 0 0

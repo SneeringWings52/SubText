@@ -1,0 +1,70 @@
+.root {
+-fx-background-color: #2c2b2b; /* Dark gray background */
+-fx-font-family: "Arial";
+}
+.label { /* Dark gray text */
+-fx-padding: 10px;
+-fx-background-colour: #494949;
+}
+#i-object {
+-fx-max-width:210;
+-fx-min-width:210;
+-fx-max-height:45;
+-fx-min-height:45;
+-fx-font-size: 18px;
+-fx-font-weight: bold;
+-fx-border-width: 2;
+-fx-text-fill: #DAA520;
+-fx-border-color: #DAA520;
+-fx-border-style: dashed;
+}
+#selected-i-object {
+-fx-max-width:210;
+-fx-min-width:210;
+-fx-max-height:45;
+-fx-min-height:45;
+-fx-font-size: 18px;
+-fx-border-width: 2;
+-fx-border-color: #FFED29;
+-fx-text-fill: #FFED29;
+-fx-font-weight: bolder;
+-fx-border-style: solid;
+}
+#dialouge {
+-fx-max-width:210;
+-fx-min-width:210;
+-fx-font-size: 18px;
+-fx-border-width: 2;
+-fx-border-color: #FFED29;
+-fx-text-fill: #FFED29;
+-fx-font-weight: bolder;
+-fx-border-style: solid;
+}
+#current-room {
+-fx-max-width:210;
+-fx-min-width:210;
+-fx-max-height:45;
+-fx-min-height:45;
+-fx-font-size: 18px;
+-fx-alignment: CENTER;
+-fx-text-fill: #FFED29;
+-fx-font-weight: bold;
+}
+#room-direction-empty {
+-fx-max-width:200;
+-fx-min-width:200;
+-fx-max-height:45;
+-fx-min-height:45;
+-fx-font-size: 18px;
+-fx-text-fill: #DAA520;
+-fx-font-weight: bold;
+}
+#room-direction {
+-fx-max-width:200;
+-fx-min-width:200;
+-fx-max-height:45;
+-fx-min-height:45;
+-fx-font-size: 18px;
+-fx-text-fill: #FFED29;
+-fx-font-weight: bold;
+}
