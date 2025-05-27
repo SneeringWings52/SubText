@@ -3,7 +3,7 @@ package com.cw1;
 public class Bulkhead extends Object{
     //private int globalObjectID = 4;
     private int currentPlayer = 0;
-    private String dialouge = "Work In Progress";
+    private String dialouge = "Heavy ...very heavy.";
 
     @Override
     public int getCurrentPlayer() {

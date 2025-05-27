@@ -93,7 +93,7 @@ public class GraphicalUserInterface extends Application {
         for (int i = 0; i < this.currentRoomLabelsP1.size(); i++) {
             this.gridPane.add(this.currentRoomLabelsP1.get(i), 1, i + 2);
         }
-        this.currentRoomNameLabels[0] = new Label("-- "+ nextRoom.getRoomName() +" --");
+        this.currentRoomNameLabels[0] = new Label("-- "+ Game.getInstance().getCurrentPlayerLocation().getLocationName() +" : "+ nextRoom.getRoomName() +" --");
         this.currentRoomNameLabels[0].setId("current-room");
         this.gridPane.add(this.currentRoomNameLabels[0], 1, 1);
         updateRoomDirectionLabelsP1(nextRoom);
@@ -106,7 +106,7 @@ public class GraphicalUserInterface extends Application {
 
         this.currentRoomDirectionLabelsP1 = new Label[4];
         this.currentRoomDirectionLabelsP1[0] = new Label("↑  Nothing");
-        this.currentRoomDirectionLabelsP1[0].setId("room-direction-empty");
+        this.currentRoomDirectionLabelsP1[0].setId("room-direction-empty-vertical");
         this.currentRoomDirectionLabelsP1[0].setAlignment(Pos.BASELINE_CENTER);
         this.gridPane.add(this.currentRoomDirectionLabelsP1[0], 1, 0);
 
@@ -116,7 +116,7 @@ public class GraphicalUserInterface extends Application {
         this.gridPane.add(this.currentRoomDirectionLabelsP1[1], 0, 1);
 
         this.currentRoomDirectionLabelsP1[2] = new Label("↓  Nothing");
-        this.currentRoomDirectionLabelsP1[2].setId("room-direction-empty");
+        this.currentRoomDirectionLabelsP1[2].setId("room-direction-empty-vertical");
         this.currentRoomDirectionLabelsP1[2].setAlignment(Pos.BASELINE_CENTER);
         if (currentPlayeriObjectState[0] == true) {
             this.gridPane.add(this.currentRoomDirectionLabelsP1[2], 1, this.currentInteractLabelsP1.size() + 10);
@@ -134,7 +134,7 @@ public class GraphicalUserInterface extends Application {
             if (localRoomMatrix[i] == 1) {
                 String roomName = currentLocation.getRooms()[i].getRoomName();
                 this.currentRoomDirectionLabelsP1[0].setText("↑  "+ roomName);
-                this.currentRoomDirectionLabelsP1[0].setId("room-direction");
+                this.currentRoomDirectionLabelsP1[0].setId("room-direction-vertical");
             }
             if (localRoomMatrix[i] == 2) {
                 String roomName = currentLocation.getRooms()[i].getRoomName();
@@ -144,7 +144,7 @@ public class GraphicalUserInterface extends Application {
             if (localRoomMatrix[i] == 3) {
                 String roomName = currentLocation.getRooms()[i].getRoomName();
                 this.currentRoomDirectionLabelsP1[2].setText("↓  " + roomName);
-                this.currentRoomDirectionLabelsP1[2].setId("room-direction");
+                this.currentRoomDirectionLabelsP1[2].setId("room-direction-vertical");
             }
             if (localRoomMatrix[i] == 4) {
                 String roomName = currentLocation.getRooms()[i].getRoomName();
@@ -173,7 +173,7 @@ public class GraphicalUserInterface extends Application {
         for (int i = 0; i < this.currentRoomLabelsP2.size(); i++) {
             this.gridPane.add(this.currentRoomLabelsP2.get(i), 4, i + 2);
         }
-        this.currentRoomNameLabels[1] = new Label("-- "+ nextRoom.getRoomName() +" --");
+        this.currentRoomNameLabels[1] = new Label("-- "+ Game.getInstance().getCurrentPlayerLocation().getLocationName() +" : "+ nextRoom.getRoomName() +" --");
         this.currentRoomNameLabels[1].setId("current-room");
         this.gridPane.add(this.currentRoomNameLabels[1], 4, 1);
         updateRoomDirectionLabelsP2(nextRoom);
@@ -186,7 +186,7 @@ public class GraphicalUserInterface extends Application {
 
         this.currentRoomDirectionLabelsP2 = new Label[4];
         this.currentRoomDirectionLabelsP2[0] = new Label("↑  Nothing");
-        this.currentRoomDirectionLabelsP2[0].setId("room-direction-empty");
+        this.currentRoomDirectionLabelsP2[0].setId("room-direction-empty-vertical");
         this.currentRoomDirectionLabelsP2[0].setAlignment(Pos.BASELINE_CENTER);
         this.gridPane.add(this.currentRoomDirectionLabelsP2[0], 4, 0);
 
@@ -196,9 +196,9 @@ public class GraphicalUserInterface extends Application {
         this.gridPane.add(this.currentRoomDirectionLabelsP2[1], 3, 1);
 
         this.currentRoomDirectionLabelsP2[2] = new Label("↓  Nothing");
-        this.currentRoomDirectionLabelsP2[2].setId("room-direction-empty");
+        this.currentRoomDirectionLabelsP2[2].setId("room-direction-empty-vertical");
         this.currentRoomDirectionLabelsP2[2].setAlignment(Pos.BASELINE_CENTER);
-        if (currentPlayeriObjectState[0] == true) {
+        if (currentPlayeriObjectState[1] == true) {
             this.gridPane.add(this.currentRoomDirectionLabelsP2[2], 4, this.currentInteractLabelsP2.size() + 10);
         } else {
             this.gridPane.add(this.currentRoomDirectionLabelsP2[2], 4, this.currentRoomLabelsP2.size() + 2);
@@ -214,7 +214,7 @@ public class GraphicalUserInterface extends Application {
             if (localRoomMatrix[i] == 1) {
                 String roomName = currentLocation.getRooms()[i].getRoomName();
                 this.currentRoomDirectionLabelsP2[0].setText("↑  "+ roomName);
-                this.currentRoomDirectionLabelsP2[0].setId("room-direction");
+                this.currentRoomDirectionLabelsP2[0].setId("room-direction-vertical");
             }
             if (localRoomMatrix[i] == 2) {
                 String roomName = currentLocation.getRooms()[i].getRoomName();
@@ -224,7 +224,7 @@ public class GraphicalUserInterface extends Application {
             if (localRoomMatrix[i] == 3) {
                 String roomName = currentLocation.getRooms()[i].getRoomName();
                 this.currentRoomDirectionLabelsP2[2].setText("↓  " + roomName);
-                this.currentRoomDirectionLabelsP2[2].setId("room-direction");
+                this.currentRoomDirectionLabelsP2[2].setId("room-direction-vertical");
             }
             if (localRoomMatrix[i] == 4) {
                 String roomName = currentLocation.getRooms()[i].getRoomName();
@@ -390,7 +390,7 @@ public class GraphicalUserInterface extends Application {
         for (int i = offset; i < this.currentInteractLabelsP2.size(); i++) {
             this.gridPane.add(this.currentInteractLabelsP2.get(i), 4, i + (span+1));
         }
-        this.updateRoomDirectionLabelsP1(Game.getInstance().getCurrentPlayerRoom()[1]);
+        this.updateRoomDirectionLabelsP2(Game.getInstance().getCurrentPlayerRoom()[1]);
     }
 
      public void writeDialougeCLIP1(String objectName, String dialouge, int span, String[] choices) {

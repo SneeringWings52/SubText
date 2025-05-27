@@ -24,14 +24,14 @@ public class Locker extends Object{
         this.currentPlayer = activePlayer;
         if (activePlayer == 1) {
             if (Game.getInstance().getIsCLI() == false) {
-                GUI.writeDialougeP1(this.getObjectName(), this.dialouge, 2, new String[0], -1);
+                GUI.writeDialougeP1(this.getObjectName(), this.dialouge, 1, new String[0], -1);
             } else {
                 GUI.writeDialougeCLIP1(this.getObjectName(), this.dialouge, 1, new String[0]);
             }
         }
         if (activePlayer == 2) {
             if (Game.getInstance().getIsCLI() == false) {
-                GUI.writeDialougeP2(this.getObjectName(), this.dialouge, 2, new String[0], -1);
+                GUI.writeDialougeP2(this.getObjectName(), this.dialouge, 1, new String[0], -1);
             } else {
                 GUI.writeDialougeCLIP2(this.getObjectName(), this.dialouge, 1, new String[0]);
             }
@@ -44,16 +44,16 @@ public class Locker extends Object{
         int rSelect = r.nextInt(4);
         switch(rSelect) {
             case 0:
-                this.dialouge = "Its locked, you can't\nget in.";
+                this.dialouge = "Its locked, you can't get in.";
                 break;
             case 1:
-                this.dialouge = "Its unlocked, revealing\nan array of\nmismatched toolsets.";
+                this.dialouge = "Its unlocked, revealing an array of mismatched toolsets.";
                 break;
             case 2:
-                this.dialouge = "Its locked, you can't\nget in.";
+                this.dialouge = "Its locked, you can't get in.";
                 break;
             case 3:
-                this.dialouge = "Its locked, you can't\nget in.";
+                this.dialouge = "Its locked, you can't get in.";
                 break;
             }
         return;

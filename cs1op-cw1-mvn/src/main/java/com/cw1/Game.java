@@ -13,9 +13,11 @@ public class Game {
     private Location[] availableLocations = new Location[this.locationFilenames.length];
     private Location currentPlayerLocation; 
     private int[] currentPlayeriObject = new int[2];
-    private Room[] availableRooms; //
-    private int[][] roomMatrix; //
-    private Room[] currentPlayerRoom; //
+    private Room[] availableRooms;
+    private int[][] roomMatrix;
+    private Room[] currentPlayerRoom;
+    private boolean[] questAccepted = new boolean[] {false, false, false};
+    private int[] items = new int[] {0, 0, 0, 0}; // 0 = flowers, 1 = docs pt1, 2 = docs pt2, 3 = coin
     
     public static Game getInstance() {
         if (instance == null) {
@@ -52,12 +54,28 @@ public class Game {
         return this.locationMatrix;
     }
 
+     public boolean[] getQuestAccepted() {
+        return this.questAccepted;
+    }
+
+     public int[] getItems() {
+        return this.items;
+    }
+
     public boolean getIsCLI() {
         return this.isCLI;
     }
 
     public void setIsCLI(boolean value) {
         this.isCLI = value;
+    }
+
+    public void setQuestAccepted(int index, boolean value) {
+        this.questAccepted[index] = value;
+    }
+
+    public void setItems(int index, int value) {
+        this.items[index] = value;
     }
 
     public Location gameSetup(GraphicalUserInterface GUI) {

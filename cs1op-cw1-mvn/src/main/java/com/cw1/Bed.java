@@ -3,7 +3,7 @@ package com.cw1;
 public class Bed extends Object{
     //private int globalObjectID = 5;
     private int currentPlayer = 0;
-    private String dialouge = "Work In Progress";
+    private String dialouge = "It looks comfy, about as comfy as a metal slab and cloth can.";
 
     @Override
     public int getCurrentPlayer() {
@@ -12,7 +12,7 @@ public class Bed extends Object{
 
     @Override
     public String getObjectName() {
-        return "Bulkhead";
+        return "Bed";
     }
 
     @Override
