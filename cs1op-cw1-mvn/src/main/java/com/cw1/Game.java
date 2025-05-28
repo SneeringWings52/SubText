@@ -3,9 +3,14 @@ package com.cw1;
 import javafx.scene.control.Label;
 import java.util.*;
 
+/**
+ * Main Game class that manages game state, player actions, locations, rooms, and logging.
+ * Implements singleton pattern to ensure only one instance exists.
+ */
 public class Game {
     private static Game instance;
     private GraphicalUserInterface GUI;
+    private Log log = new Log();
     private boolean isCLI = false;
     private boolean gameComplete = false;
     private String[] locationFilenames = new String[] {"ConamaraSettlementLoc.txt", "AmaltheaCampLoc.txt", "JohannesStopLoc.txt", "JimoMarketLoc.txt"};
@@ -18,7 +23,10 @@ public class Game {
     private Room[] currentPlayerRoom;
     private boolean[] questAccepted = new boolean[] {false, false, false};
     private int[] items = new int[] {0, 0, 0, 0}; // 0 = flowers, 1 = docs pt1, 2 = docs pt2, 3 = coin
-    
+
+    /**
+     * Returns the singleton instance of the Game.
+     */
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
@@ -26,58 +34,107 @@ public class Game {
         return instance;
     }
 
+    /**
+     * Returns the GUI instance.
+     */
     public GraphicalUserInterface getGUI() {
         return this.GUI;
     }
 
+    /**
+     * Returns the Log instance.
+     */
+    public Log getLog() {
+        return this.log;
+    }
+
+    /**
+     * Returns whether the game is complete.
+     */
     public boolean getGameComplete() {
         return gameComplete;
     }
 
+    /**
+     * Returns the state of player interactive objects.
+     */
     public boolean[] getPlayerIObjectState() {
         return this.GUI.getPlayerIObjectState();
     }
 
+    /**
+     * Returns the current player location.
+     */
     public Location getCurrentPlayerLocation() {
         return this.currentPlayerLocation;
     }
 
+    /**
+     * Returns the current rooms for both players.
+     */
     public Room[] getCurrentPlayerRoom() {
         return this.currentPlayerRoom;
     }
 
+    /**
+     * Returns all available locations.
+     */
     public Location[] getAvailableLocations() {
         return this.availableLocations;
     }
 
+    /**
+     * Returns the location matrix.
+     */
     public int[][] getLocationMatrix() {
         return this.locationMatrix;
     }
 
-     public boolean[] getQuestAccepted() {
+    /**
+     * Returns the quest accepted state array.
+     */
+    public boolean[] getQuestAccepted() {
         return this.questAccepted;
     }
 
-     public int[] getItems() {
+    /**
+     * Returns the items array.
+     */
+    public int[] getItems() {
         return this.items;
     }
 
+    /**
+     * Returns whether the game is running in CLI mode.
+     */
     public boolean getIsCLI() {
         return this.isCLI;
     }
 
+    /**
+     * Sets CLI mode.
+     */
     public void setIsCLI(boolean value) {
         this.isCLI = value;
     }
 
+    /**
+     * Sets the quest accepted state for a given quest.
+     */
     public void setQuestAccepted(int index, boolean value) {
         this.questAccepted[index] = value;
     }
 
+    /**
+     * Sets the value for a specific item.
+     */
     public void setItems(int index, int value) {
         this.items[index] = value;
     }
 
+    /**
+     * Sets up the game, initializes locations, rooms, and GUI.
+     */
     public Location gameSetup(GraphicalUserInterface GUI) {
         this.GUI = GUI;
         for (int i = 0; i < this.locationFilenames.length; i++) {
@@ -90,6 +147,10 @@ public class Game {
         return this.currentPlayerLocation;
     }
 
+    /**
+     * Reloads the room for the specified player.
+     * Resets their interactive object selection and updates the GUI.
+     */
     public void reloadRoom(int activePlayer) {
         this.currentPlayeriObject[activePlayer - 1] = 0;
         if (activePlayer == 1) {
@@ -112,6 +173,10 @@ public class Game {
         }
     }
 
+    /**
+     * Updates the current location for the specified player and reloads rooms.
+     * Logs the move action.
+     */
     public void updateLocation(Location newLocation, int activePlayer) {
         if (activePlayer == 1) {
             GUI.removeIObjectLabelsP1();
@@ -130,9 +195,14 @@ public class Game {
         this.roomMatrix = this.currentPlayerLocation.getRoomMatrix();
         this.currentPlayerRoom = new Room[] {this.availableRooms[0], this.availableRooms[0]};
         GUI.setCurrentLocation(newLocation);
+        this.log.addLogEntry("MOVE" + newLocation.getLocationName() + ".",activePlayer);
         this.reloadRoom(1);
         this.reloadRoom(2);
     }
+
+    /**
+     * Checks if the specified player is currently interacting with an object.
+     */
     public boolean checkPlayerIObject(int activePlayer) {
         activePlayer -= 1;
         if (activePlayer + 1 == currentPlayerRoom[activePlayer].getiObjects()[this.currentPlayeriObject[activePlayer]].getCurrentPlayer()) {
@@ -142,23 +212,36 @@ public class Game {
         }
     }
 
+    /**
+     * Returns the interactive object the specified player is currently focused on.
+     */
     public Object getPlayerIObject(int activePlayer) {
         activePlayer -= 1;
         return currentPlayerRoom[activePlayer].getiObjects()[this.currentPlayeriObject[activePlayer]];
     }
 
+    /**
+     * Handles player interaction with the currently selected interactive object.
+     * Logs the interaction and updates the GUI.
+     */
     public void interactPlayerIObject(int activePlayer) {
         if(this.checkPlayerIObject(activePlayer) == true) {
             this.getPlayerIObject(activePlayer).RInteract();
             return;
         } else {
             if (currentPlayerRoom[activePlayer - 1].getiObjects()[this.currentPlayeriObject[activePlayer - 1]].getCurrentPlayer() == 0) {
+                Object interactionObject = currentPlayerRoom[activePlayer - 1].getiObjects()[this.currentPlayeriObject[activePlayer - 1]];
+                this.log.addLogEntry("INTERACT" +interactionObject.getObjectName() + " in "+this.currentPlayerRoom[activePlayer - 1].getRoomName(), activePlayer);
                 this.GUI.setPlayerIObjectState(activePlayer - 1, true);
                 currentPlayerRoom[activePlayer - 1].getiObjects()[this.currentPlayeriObject[activePlayer - 1]].interact(GUI, activePlayer);
             } //else another Player is interacting  
         }
     }
 
+    /**
+     * Updates the player's selection of interactive objects in the GUI.
+     * Handles cycling through objects in the room.
+     */
     public void updatePlayerSelection(int activePlayer, List<Label> curRoomLabels) {
         if (this.checkPlayerIObject(activePlayer) == true) {
             this.getPlayerIObject(activePlayer).LInteract();
@@ -182,6 +265,10 @@ public class Game {
 
     }
 
+    /**
+     * Updates the player's selection of interactive objects in CLI mode.
+     * Handles cycling through objects in the room.
+     */
     public void updatePlayerSelectionCLI(int activePlayer, List<String> curRoomStrings) {
         if (this.checkPlayerIObject(activePlayer) == true) {
             this.getPlayerIObject(activePlayer).LInteract();
@@ -202,6 +289,10 @@ public class Game {
 
     }
 
+    /**
+     * Handles player movement between rooms in GUI mode.
+     * Updates the current room and GUI labels.
+     */
     public void updatePlayerRoom(int activePlayer, int direction) {
         if (this.checkPlayerIObject(activePlayer) == true) {
             switch(direction) {
@@ -244,6 +335,10 @@ public class Game {
         }
     }
 
+    /**
+     * Handles player movement between rooms in CLI mode.
+     * Updates the current room and CLI strings.
+     */
     public void updatePlayerRoomCLI(int activePlayer, int direction) {
         if (this.checkPlayerIObject(activePlayer) == true) {
             switch(direction) {

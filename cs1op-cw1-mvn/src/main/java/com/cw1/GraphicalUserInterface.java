@@ -16,12 +16,17 @@ import java.util.*;
 
 import javafx.scene.text.TextAlignment;
 
-
+/**
+ * Main class for the game's graphical user interface (GUI) and CLI.
+ * Handles all display logic, user input, and scene management for both players.
+ */
 public class GraphicalUserInterface extends Application {
+    // Main application window and layout
     private Stage stage = new Stage();
     private GridPane gridPane = new GridPane();
     private Location currentLocation;
 
+    // GUI state for Player 1 and Player 2
     private Label[] currentRoomNameLabels = new Label[2];
     private List<Label> currentRoomLabelsP1 = new ArrayList<>();
     private Label[] currentRoomDirectionLabelsP1 = new Label[4];
@@ -30,6 +35,7 @@ public class GraphicalUserInterface extends Application {
     private List<Label> currentInteractLabelsP1 = new ArrayList<>();
     private List<Label> currentInteractLabelsP2 = new ArrayList<>();
 
+    // CLI state for Player 1 and Player 2
     private boolean[] currentPlayeriObjectState = new boolean[] {false, false};
     private String[] currentRoomNamesCLI = new String[2];
     private List<String> currentRoomIObjectsP1 = new ArrayList<>();
@@ -39,48 +45,27 @@ public class GraphicalUserInterface extends Application {
     private List<String> currentInteractStringsP1 = new ArrayList<>();
     private List<String> currentInteractStringsP2 = new ArrayList<>();
 
-    public Stage getStage() {
-        return this.stage;
-    }
-
-    public GridPane getGridPane() {
-        return this.gridPane;
-    }
-
-    public List<Label> getCurrentRoomLabelsP1() {
-        return this.currentRoomLabelsP1;
-    }
-    
-    public List<Label> getCurrentRoomLabelsP2() {
-        return this.currentRoomLabelsP2;
-    }
-
-    public List<String> getCurrentRoomIObjectsP1() {
-        return this.currentRoomIObjectsP1;
-    }
-    
-    public List<String> getCurrentRoomIObjectsP2() {
-        return this.currentRoomIObjectsP2;
-    } 
-
-    public boolean[] getPlayerIObjectState() {
-        return this.currentPlayeriObjectState;
-    }
-
+    // Getters for GUI components and state
+    public Stage getStage() { return this.stage; }
+    public GridPane getGridPane() { return this.gridPane; }
+    public List<Label> getCurrentRoomLabelsP1() { return this.currentRoomLabelsP1; }
+    public List<Label> getCurrentRoomLabelsP2() { return this.currentRoomLabelsP2; }
+    public List<String> getCurrentRoomIObjectsP1() { return this.currentRoomIObjectsP1; }
+    public List<String> getCurrentRoomIObjectsP2() { return this.currentRoomIObjectsP2; }
+    public boolean[] getPlayerIObjectState() { return this.currentPlayeriObjectState; }
     public void setPlayerIObjectState(int activePlayerIndex, boolean setValue) {
         this.currentPlayeriObjectState[activePlayerIndex] = setValue;
     }
+    public void setCurrentLocation(Location newLocation) { this.currentLocation = newLocation; }
 
-    public void setCurrentLocation(Location newLocation) {
-        this.currentLocation = newLocation;
-    }
-
+    /**
+     * Adds and updates the room labels and direction labels for Player 1 in the GUI.
+     */
     public void addNextRoomLabelsP1(Room nextRoom) {
         for (Label curLabel : this.currentRoomLabelsP1) {
             this.gridPane.getChildren().remove(curLabel);
         }
         this.gridPane.getChildren().remove(this.currentRoomNameLabels[0]);
-        
         this.currentRoomLabelsP1 = new ArrayList<>();
         Label newLabel = new Label("->  "+ nextRoom.getObjectNames()[0] + "  <-");
         newLabel.setId("selected-i-object");
@@ -99,11 +84,13 @@ public class GraphicalUserInterface extends Application {
         updateRoomDirectionLabelsP1(nextRoom);
     }
 
+    /**
+     * Updates the direction labels for Player 1 based on the current room's connections.
+     */
     public void updateRoomDirectionLabelsP1(Room room) {
         for (Label curRLabel : this.currentRoomDirectionLabelsP1) {
             this.gridPane.getChildren().remove(curRLabel);
         }
-
         this.currentRoomDirectionLabelsP1 = new Label[4];
         this.currentRoomDirectionLabelsP1[0] = new Label("↑  Nothing");
         this.currentRoomDirectionLabelsP1[0].setId("room-direction-empty-vertical");
@@ -152,15 +139,16 @@ public class GraphicalUserInterface extends Application {
                 this.currentRoomDirectionLabelsP1[3].setId("room-direction");
             }
         }
-        
     }
-    
+
+    /**
+     * Adds and updates the room labels and direction labels for Player 2 in the GUI.
+     */
     public void addNextRoomLabelsP2(Room nextRoom) {
         for (Label curLabel : this.currentRoomLabelsP2) {
             this.gridPane.getChildren().remove(curLabel);
         }
         this.gridPane.getChildren().remove(this.currentRoomNameLabels[1]);
-
         this.currentRoomLabelsP2 = new ArrayList<>();
         Label newLabel = new Label("->  "+ nextRoom.getObjectNames()[0] + "  <-");
         newLabel.setId("selected-i-object");
@@ -179,11 +167,13 @@ public class GraphicalUserInterface extends Application {
         updateRoomDirectionLabelsP2(nextRoom);
     }
 
+    /**
+     * Updates the direction labels for Player 2 based on the current room's connections.
+     */
     public void updateRoomDirectionLabelsP2(Room room) {
         for (Label curRLabel : this.currentRoomDirectionLabelsP2) {
             this.gridPane.getChildren().remove(curRLabel);
         }
-
         this.currentRoomDirectionLabelsP2 = new Label[4];
         this.currentRoomDirectionLabelsP2[0] = new Label("↑  Nothing");
         this.currentRoomDirectionLabelsP2[0].setId("room-direction-empty-vertical");
@@ -234,6 +224,9 @@ public class GraphicalUserInterface extends Application {
         }
     }
 
+    /**
+     * Adds the next room's interactive object strings for Player 1 in CLI mode.
+     */
     public void addNextRoomStringsP1(Room nextRoom) {
         this.currentPlayeriObjectState[0] = false;
         this.currentRoomIObjectsP1 = new ArrayList<>();
@@ -249,6 +242,9 @@ public class GraphicalUserInterface extends Application {
         updateRoomDirectionsP1(nextRoom);
     }
 
+    /**
+     * Updates the CLI direction strings for Player 1.
+     */
     public void updateRoomDirectionsP1(Room room) {
         this.currentRoomDirectionsP1 = new String[4];
         this.currentRoomDirectionsP1[0] = "-W-  Nothing";
@@ -275,9 +271,11 @@ public class GraphicalUserInterface extends Application {
                 this.currentRoomDirectionsP1[3] = "-D-  " + roomName;
             }
         }
-        
     }
 
+    /**
+     * Adds the next room's interactive object strings for Player 2 in CLI mode.
+     */
     public void addNextRoomStringsP2(Room nextRoom) {
         this.currentPlayeriObjectState[1] = false;
         this.currentRoomIObjectsP2 = new ArrayList<>();
@@ -293,6 +291,9 @@ public class GraphicalUserInterface extends Application {
         updateRoomDirectionsP2(nextRoom);
     }
 
+    /**
+     * Updates the CLI direction strings for Player 2.
+     */
     public void updateRoomDirectionsP2(Room room) {
         this.currentRoomDirectionsP2 = new String[4];
         this.currentRoomDirectionsP2[0] = "-I-  Nothing";
@@ -319,9 +320,11 @@ public class GraphicalUserInterface extends Application {
                 this.currentRoomDirectionsP2[3] = "-L-  " + roomName;
             }
         }
-        
     }
 
+    /**
+     * Displays dialogue for Player 1 in the GUI, including choices and highlights.
+     */
     public void writeDialougeP1(String objectName, String dialouge, int span, String[] choices, int selected) {
         for (Label curLabel : this.currentRoomLabelsP1) {
             this.gridPane.getChildren().remove(curLabel);
@@ -355,9 +358,11 @@ public class GraphicalUserInterface extends Application {
             this.gridPane.add(this.currentInteractLabelsP1.get(i), 1, i + (span+1));
         }
         this.updateRoomDirectionLabelsP1(Game.getInstance().getCurrentPlayerRoom()[0]);
-
     }
 
+    /**
+     * Displays dialogue for Player 2 in the GUI, including choices and highlights.
+     */
     public void writeDialougeP2(String objectName, String dialouge, int span, String[] choices, int selected) {
         for (Label curLabel : this.currentRoomLabelsP2) {
             this.gridPane.getChildren().remove(curLabel);
@@ -393,7 +398,10 @@ public class GraphicalUserInterface extends Application {
         this.updateRoomDirectionLabelsP2(Game.getInstance().getCurrentPlayerRoom()[1]);
     }
 
-     public void writeDialougeCLIP1(String objectName, String dialouge, int span, String[] choices) {
+    /**
+     * Displays dialogue for Player 1 in CLI mode.
+     */
+    public void writeDialougeCLIP1(String objectName, String dialouge, int span, String[] choices) {
         this.currentPlayeriObjectState[0] = true;
         this.removeIObjectLabelsP1();
         this.currentInteractStringsP1 = new ArrayList<>();
@@ -404,9 +412,11 @@ public class GraphicalUserInterface extends Application {
         for (int i = 0; i < choices.length; i++) {
             this.currentInteractStringsP1.add(choices[i]);
         }
-
     }
 
+    /**
+     * Displays dialogue for Player 2 in CLI mode.
+     */
     public void writeDialougeCLIP2(String objectName, String dialouge, int span, String[] choices) {
         this.currentPlayeriObjectState[1] = true;
         this.removeIObjectLabelsP2();
@@ -418,21 +428,29 @@ public class GraphicalUserInterface extends Application {
         for (int i = 0; i < choices.length; i++) {
             this.currentInteractStringsP2.add(choices[i]);
         }
-
     }
 
+    /**
+     * Removes all interactive object labels for Player 1 from the GUI.
+     */
     public void removeIObjectLabelsP1() {
         for (Label curILabel: this.currentInteractLabelsP1) {
             this.gridPane.getChildren().remove(curILabel);
         }
     }
 
+    /**
+     * Removes all interactive object labels for Player 2 from the GUI.
+     */
     public void removeIObjectLabelsP2() {
         for (Label curILabel: this.currentInteractLabelsP2) {
             this.gridPane.getChildren().remove(curILabel);
         }
     }
 
+    /**
+     * Outputs the current CLI state for both players to the console.
+     */
     public void outputCLI() {
         String commandLineString = "\n\n";
         commandLineString += this.currentRoomNamesCLI[0] +"\n";
@@ -466,7 +484,10 @@ public class GraphicalUserInterface extends Application {
         }
         System.out.println(commandLineString);
     }
-    
+
+    /**
+     * JavaFX application entry point. Prompts for CLI or GUI mode and starts the game.
+     */
     @Override
     public void start(Stage primaryStage) {
         this.currentLocation = Game.getInstance().gameSetup(this);
@@ -492,6 +513,9 @@ public class GraphicalUserInterface extends Application {
         }
     }
 
+    /**
+     * Starts the CLI game loop.
+     */
     public void startCLI() {
         this.addNextRoomStringsP1(this.currentLocation.getRooms()[0]);
         this.addNextRoomStringsP2(this.currentLocation.getRooms()[0]);
@@ -502,6 +526,9 @@ public class GraphicalUserInterface extends Application {
         }
     }
 
+    /**
+     * Sets up the main grid pane for the GUI, sizing and aligning it to the screen.
+     */
     public void setupGridPane () {
         this.gridPane = new GridPane();
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
@@ -516,10 +543,16 @@ public class GraphicalUserInterface extends Application {
         this.gridPane.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Placeholder for test code.
+     */
     public void testCode() {
         return;
     }
     
+    /**
+     * Displays an alert scene with a button to return to the main game.
+     */
     public void alert(){
         Label alertLabel = new Label("ALERT!!!");
         Button alertButton = new Button("Remove Alert");
@@ -530,9 +563,11 @@ public class GraphicalUserInterface extends Application {
         this.stage.setScene(alertScene);
     }
 
+    /**
+     * Main entry point for launching the application.
+     */
     public static void main(String[] args){
         System.out.println("Runs");
         launch(args);
     }
 }
-//java --module-path "..\javafx-sdk-21.0.4\lib" --add-modules javafx.controls GraphicalUserInterface

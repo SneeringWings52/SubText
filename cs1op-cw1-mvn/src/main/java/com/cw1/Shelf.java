@@ -1,25 +1,54 @@
 package com.cw1;
 
-public class Shelf extends Object{
-    //private int globalObjectID = 10;
+/**
+ * Represents a shelf object in the game.
+ * Handles player interaction, organization state, and dialogue display.
+ */
+public class Shelf extends Object {
+    // globalObjectID = 10
+
+    // Tracks which player is currently interacting with the shelf
     private int currentPlayer = 0;
+
+    // Indicates whether the shelf is organized (true) or not (false)
     public boolean organised = false;
-    private String dialouge = "The shelf's contents are spilling out onto the floor. Very unefficiently stacked too ...";
 
-    public boolean getOrganised() {
-        return this.organised;
-    }
+    // Dialogue to display when interacting with the shelf
+    private String dialouge = "The shelf's contents are spilling out,\nall onto the floor.\nVery unefficiently stacked too ...";
 
+    /**
+     * Returns the current player interacting with the shelf.
+     */
     @Override
     public int getCurrentPlayer() {
         return this.currentPlayer;
     }
 
+    /**
+     * Returns the name of the object.
+     */
     @Override
     public String getObjectName() {
         return "Shelf";
     }
 
+    /**
+     * Returns the state of the shelf.
+     * 1 if organized, 0 if not.
+     */
+    @Override
+    public int getState() {
+        if (this.organised == true) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Handles interaction with the shelf.
+     * Displays appropriate dialogue and choices depending on organization state.
+     */
     @Override
     public void interact(GraphicalUserInterface GUI, int activePlayer) {
         this.currentPlayer = activePlayer;
@@ -28,9 +57,12 @@ public class Shelf extends Object{
             choices = new String[] {"-W- to Organise"};
         } else {
             choices = new String[] {"-I- to Organise"};
-        } if (this.organised == true) {
+        }
+        // If already organized, remove choices
+        if (this.organised == true) {
             choices = new String[0];
         }
+        // Display dialogue for player 1
         if (activePlayer == 1) {
             if (Game.getInstance().getIsCLI() == false) {
                 GUI.writeDialougeP1(this.getObjectName(), this.dialouge, 1, choices, 0);
@@ -38,6 +70,7 @@ public class Shelf extends Object{
                 GUI.writeDialougeCLIP1(this.getObjectName(), this.dialouge, 1, choices);
             }
         }
+        // Display dialogue for player 2
         if (activePlayer == 2) {
             if (Game.getInstance().getIsCLI() == false) {
                 GUI.writeDialougeP2(this.getObjectName(), this.dialouge, 1, choices, 0);
@@ -48,12 +81,15 @@ public class Shelf extends Object{
         return;
     }
 
-
+    /**
+     * Handles the "Up" action (player organizes the shelf).
+     * Updates organization state and dialogue, and displays the result.
+     */
     @Override
     public void Up() {
         if (this.organised == false) {
             this.organised = true;
-            this.dialouge = "The shelf looks nice and neatly organised, fine work from yourself.";
+            this.dialouge = "The shelf looks nice and neatly organised,\nfine work from yourself.";
             if (this.currentPlayer == 1) {
                 if (Game.getInstance().getIsCLI() == false) {
                     Game.getInstance().getGUI().writeDialougeP1(this.getObjectName(), this.dialouge, 1, new String[0], 0);
@@ -71,27 +107,43 @@ public class Shelf extends Object{
         }
         return;
     }
-    
+
+    /**
+     * Handles the "Left" action. No operation for this object.
+     */
     @Override
     public void Left() {
         return;
     }
 
+    /**
+     * Handles the "Down" action. No operation for this object.
+     */
     @Override
     public void Down() {
         return;
     }
 
+    /**
+     * Handles the "Right" action. No operation for this object.
+     */
     @Override
     public void Right() {
         return;
     }
 
+    /**
+     * Handles the "LInteract" action. No operation for this object.
+     */
     @Override
     public void LInteract() {
         return;
     }
 
+    /**
+     * Handles the "RInteract" action.
+     * Resets the current player and reloads the room for that player.
+     */
     @Override
     public void RInteract() {
         int tempPlayer = this.currentPlayer;

@@ -1,14 +1,30 @@
 package com.cw1;
+
 import javafx.event.*;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Event filter for handling Player 2's keyboard input in the GUI.
+ * Maps specific key presses to player actions in the game.
+ */
 public class P2CustomEventFilter implements EventHandler<KeyEvent> {
+    // Reference to the GUI interface
     private GraphicalUserInterface source;
     
+    /**
+     * Constructs a P2CustomEventFilter with the given GUI source.
+     * @param GUI The graphical user interface handler.
+     */
     public P2CustomEventFilter(GraphicalUserInterface GUI) {
         this.source = GUI;
     }
 
+    /**
+     * Handles Player 2's key events and triggers corresponding game actions.
+     * U: Cycle interactive objects
+     * O: Interact with selected object
+     * I/J/K/L: Move between rooms (up/left/down/right)
+     */
     @Override
     public void handle(KeyEvent event) {
         switch (event.getCode()) {

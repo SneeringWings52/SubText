@@ -1,20 +1,38 @@
 package com.cw1;
 
-public class Reactor extends Object{
-    //private int globalObjectID = 1;
-    private int currentPlayer = 0;
-    private String dialouge = "The reactor glows bright green, probably meaning you shouldn't mess with it.";
+/**
+ * Represents the Reactor object in the game.
+ * Handles player interaction and displays dialogue.
+ */
+public class Reactor extends Object {
+    // globalObjectID = 1
 
+    // Tracks which player is currently interacting with the reactor
+    private int currentPlayer = 0;
+
+    // Dialogue to display when interacting with the reactor
+    private String dialouge = "The reactor glows bright green,\nprobably meaning you shouldn't mess with it.";
+
+    /**
+     * Returns the current player interacting with the reactor.
+     */
     @Override
     public int getCurrentPlayer() {
         return this.currentPlayer;
     }
 
+    /**
+     * Returns the name of the object.
+     */
     @Override
     public String getObjectName() {
         return "Reactor";
     }
 
+    /**
+     * Handles interaction with the reactor.
+     * Displays appropriate dialogue for the active player.
+     */
     @Override
     public void interact(GraphicalUserInterface GUI, int activePlayer) {
         this.currentPlayer = activePlayer;
@@ -35,31 +53,50 @@ public class Reactor extends Object{
         return;
     }
 
+    /**
+     * Handles the "Up" action. No operation for this object.
+     */
     @Override
     public void Up() {
         return;
     }
 
+    /**
+     * Handles the "Left" action. No operation for this object.
+     */
     @Override
     public void Left() {
         return;
     }
 
+    /**
+     * Handles the "Down" action. No operation for this object.
+     */
     @Override
     public void Down() {
         return;
     }
 
+    /**
+     * Handles the "Right" action. No operation for this object.
+     */
     @Override
     public void Right() {
         return;
     }
 
+    /**
+     * Handles the "LInteract" action. No operation for this object.
+     */
     @Override
     public void LInteract() {
         return;
     }
 
+    /**
+     * Handles the "RInteract" action.
+     * Resets the current player and reloads the room for that player.
+     */
     @Override
     public void RInteract() {
         int tempPlayer = this.currentPlayer;

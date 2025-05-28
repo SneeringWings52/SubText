@@ -1,7 +1,19 @@
 package com.cw1;
 
+/**
+ * Factory class for creating Room objects and their interactive objects.
+ * Converts integer IDs from location data into specific object instances.
+ */
 public class RoomFactory {
 
+    /**
+     * Creates an array of Room objects based on the provided room setup and names.
+     * Each room is populated with interactive objects according to their global IDs.
+     *
+     * @param roomSet   2D array where each sub-array contains the global object IDs for a room's objects.
+     * @param roomNames Array of room names, one for each room.
+     * @return Array of constructed Room objects with their interactive objects.
+     */
     public static Room[] createRoomList(int[][] roomSet, String[] roomNames) {
        Room[] returningRooms = new Room[roomSet.length];
        Object[] iObjects;
@@ -9,6 +21,7 @@ public class RoomFactory {
             iObjects = new Object[roomSet[i].length];
             for (int j = 0; j < roomSet[i].length; j++) {
                 int targetObjectGID = roomSet[i][j];
+                // Instantiate the correct object type based on its global ID
                 switch (targetObjectGID) {
                     case 0:
                         iObjects[j] = new Locker();
@@ -74,6 +87,7 @@ public class RoomFactory {
                         throw new IllegalArgumentException("Unknown TOGID int: " + targetObjectGID);
                 };
             }
+            // Create the Room with its ID, name, and interactive objects
             returningRooms[i] = new Room(i, roomNames[i], iObjects);
        }
         return returningRooms;
