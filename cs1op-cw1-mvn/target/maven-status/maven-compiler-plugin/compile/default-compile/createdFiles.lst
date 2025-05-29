@@ -1,3 +1,4 @@
+com\cw1\Log.class
 com\cw1\Object.class
 com\cw1\FlowerMerchant.class
 com\cw1\Command.class
@@ -5,6 +6,7 @@ com\cw1\Locker.class
 com\cw1\Shelf.class
 com\cw1\Window.class
 com\cw1\HydroponicsBasin.class
+com\cw1\Main.class
 com\cw1\ManualEventFilter.class
 com\cw1\AmaltheaQuestDesk.class
 com\cw1\P1CustomEventFilter$1.class
