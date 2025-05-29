@@ -1,11 +1,12 @@
-Module Code:  CS1OP
+Module Code:  CS1OP  
 Assignment report Title:   Project  
-Student Number (e.g. 25098635): 33010448
-Actual hrs spent for the assignment: 58
+Student Number (e.g. 25098635): 33010448  
+Actual hrs spent for the assignment: 58  
 Which Artificial Intelligence tools used: Github Co-Pilot in VsCode
 
 ## Introduction
-This is a 2-player text-based adventure titled SubText. This project demonstrates object-oriented programming (Aggregation, Composition, Inheiritance, etc..), event-driven design, and the use of both graphical and command-line interfaces for interactive gameplay.
+This is a 2-player text-based adventure titled SubText. 
+This project demonstrates object-oriented programming (Aggregation, Composition, Inheiritance, etc..), event-driven design, and the use of both graphical and command-line interfaces for interactive gameplay.
 
 **Key Features**
 1. Dual Interface: Playable via a modern JavaFX GUI or a classic Command Line Interface (CLI) which is chosen on start-up.
@@ -16,32 +17,33 @@ This is a 2-player text-based adventure titled SubText. This project demonstrate
 6. Logging: All major player actions (interactions, quest acceptance, item pickups) are logged for debugging and demonstration purposes.
 7. Extensible Design: Easily add new rooms, objects, or quests by extending the provided classes and updating configuration files (New Locations may require updates to the Location Matrix inside Game file).
 
-**Core Components**
-GraphicalUserInterface: Manages all GUI and CLI display logic, user input, and scene transitions.
-Game: Singleton class that maintains game state, player progress, and orchestrates all core logic.
-Room & Location: Define the structure of the game world, loading data from configuration files.
-Object & Subclasses: Abstract base for all interactive objects (e.g., Locker, Reactor, Merchant, Partner, Shelf), each with custom interaction logic.
-RoomFactory: Factory pattern for instantiating rooms and their objects based on configuration data.
-Event Filters: Separate classes for handling keyboard input for each player in both GUI and CLI modes.
+**Core Components**  
+GraphicalUserInterface: Manages all GUI and CLI display logic, user input, and scene transitions.  
+Game: Singleton class that maintains game state, player progress, and orchestrates all core logic.  
+Room & Location: Define the structure of the game world, loading data from configuration files.  
+Object & Subclasses: Abstract base for all interactive objects (e.g., Locker, Reactor, Merchant, Partner, Shelf), each with custom interaction logic.  
+RoomFactory: Factory pattern for instantiating rooms and their objects based on configuration data.  
+Event Filters: Separate classes for handling keyboard input for each player in both GUI and CLI modes.  
 
 ## Getting Started
-Download All Associated: All the files can be found in this git repository.
-Run the Game: Find the cs1op-cw1.bat file and double-click.
-Choose ClI or GUI: Decide between a simpler Command Line Interface or the more complex GUI.
-Explore and Play: Whichever way you decide, the controls are the same. Look below for controls.
+Download All Associated: All the files can be found in this git repository.  
+Run the Game: Find the cs1op-cw1.bat file and double-click.  
+Choose CLI or GUI: Decide between a simpler Command Line Interface or the more complex GUI.  
+Explore and Play: Whichever way you decide, the controls are the same. Look below for controls.  
 
-**Controls**
-Player1:
-    Q. Left Interact Button and is used to cycle between choices in most menus.
-    E. Right Interact Button and is used to interact or exit objects.
-    W, A, S, D. The Directional Buttons and is used to move between rooms. Can sometimes be used for extra interaction inside objects (Example: W is used to confirm choices.)
-Player2:
-    U. left Interact Button and is used to cycle between choices in most menus.
-    O. Right Interact Button and is used to interact or exit objects.
-    I, J, K, L. The Directional Buttons and is used to move between rooms. Can sometimes be used for extra interaction inside objects (Example: I is used to confirm choices.)
+**Controls**  
+Player1:  
+    Q. Left Interact Button and is used to cycle between choices in most menus.  
+    E. Right Interact Button and is used to interact or exit objects.  
+    W, A, S, D. The Directional Buttons and is used to move between rooms. Can sometimes be used for extra interaction inside objects (Example: W is used to confirm choices.)  
+Player2:  
+    U. left Interact Button and is used to cycle between choices in most menus.  
+    O. Right Interact Button and is used to interact or exit objects.  
+    I, J, K, L. The Directional Buttons and is used to move between rooms. Can sometimes be used for extra interaction inside objects (Example: I is used to confirm choices.)  
 
 ## Design
 **Simple Class Diagram in Mermaid Syntax:**
+    
     class Game {
         -boolean[] questAccepted
         -int[] items
