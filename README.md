@@ -1,93 +1,160 @@
-# CS1OP-CW1
+Module Code:  CS1OP
+Assignment report Title:   Project  
+Student Number (e.g. 25098635): 33010448
+Actual hrs spent for the assignment: 58
+Which Artificial Intelligence tools used: Github Co-Pilot in VsCode
 
+## Introduction
+This is a 2-player text-based adventure titled SubText. This project demonstrates object-oriented programming (Aggregation, Composition, Inheiritance, etc..), event-driven design, and the use of both graphical and command-line interfaces for interactive gameplay.
 
+**Key Features**
+1. Dual Interface: Playable via a modern JavaFX GUI or a classic Command Line Interface (CLI) which is chosen on start-up.
+2. Two-Player Support: Both players can interact with the world simultaneously, each with their own controls and  their own sections on each user interface.
+3. Modular Game World: The game world is structured into Locations, Rooms, and a variety of interactive Objects, each with unique behaviors and dialogue.
+4. Quest System: NPCs (like Merchants) offer quests and rewards, requiring players to explore, interact, and cooperate.
+5. Event Handling: Custom event filters for both players map keyboard input to in-game actions, supporting smooth and responsive gameplay.
+6. Logging: All major player actions (interactions, quest acceptance, item pickups) are logged for debugging and demonstration purposes.
+7. Extensible Design: Easily add new rooms, objects, or quests by extending the provided classes and updating configuration files (New Locations may require updates to the Location Matrix inside Game file).
 
-## Getting started
+**Core Components**
+GraphicalUserInterface: Manages all GUI and CLI display logic, user input, and scene transitions.
+Game: Singleton class that maintains game state, player progress, and orchestrates all core logic.
+Room & Location: Define the structure of the game world, loading data from configuration files.
+Object & Subclasses: Abstract base for all interactive objects (e.g., Locker, Reactor, Merchant, Partner, Shelf), each with custom interaction logic.
+RoomFactory: Factory pattern for instantiating rooms and their objects based on configuration data.
+Event Filters: Separate classes for handling keyboard input for each player in both GUI and CLI modes.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Getting Started
+Download All Associated: All the files can be found in this git repository.
+Run the Game: Find the cs1op-cw1.bat file and double-click.
+Choose ClI or GUI: Decide between a simpler Command Line Interface or the more complex GUI.
+Explore and Play: Whichever way you decide, the controls are the same. Look below for controls.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+**Controls**
+Player1:
+    Q. Left Interact Button and is used to cycle between choices in most menus.
+    E. Right Interact Button and is used to interact or exit objects.
+    W, A, S, D. The Directional Buttons and is used to move between rooms. Can sometimes be used for extra interaction inside objects (Example: W is used to confirm choices.)
+Player2:
+    U. left Interact Button and is used to cycle between choices in most menus.
+    O. Right Interact Button and is used to interact or exit objects.
+    I, J, K, L. The Directional Buttons and is used to move between rooms. Can sometimes be used for extra interaction inside objects (Example: I is used to confirm choices.)
 
-## Add your files
+## Design
+**Simple Class Diagram in Mermaid Syntax:**
+    class Game {
+        -boolean[] questAccepted
+        -int[] items
+        -Location currentPlayerLocation
+        -Room[] currentPlayerRoom
+        -boolean isCLI
+        -Log log
+        +getInstance()
+        +setIsCLI(boolean)
+        +setItems(int, int)
+        +setQuestAccepted(int, boolean)
+        +reloadRoom(int)
+        +getGUI()
+        +getLog()
+        +gameSetup(GraphicalUserInterface)
+    }
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+    class GraphicalUserInterface {
+        -Stage stage
+        -GridPane gridPane
+        -Location currentLocation
+        +start(Stage)
+        +startCLI()
+        +setupGridPane()
+        +addNextRoomLabelsP1(Room)
+        +addNextRoomLabelsP2(Room)
+        +outputCLI()
+        +writeDialougeP1(...)
+        +writeDialougeP2(...)
+        +writeDialougeCLIP1(...)
+        +writeDialougeCLIP2(...)
+    }
 
-```
-cd existing_repo
-git remote add origin https://csgitlab.reading.ac.uk/rj010448/cs1op-cw1.git
-git branch -M main
-git push -uf origin main
-```
+    class Location {
+        -int locID
+        -String locName
+        -Room[] rooms
+        -int[][] roomMatrix
+        +getRooms()
+        +getLocationName()
+        +getRoomMatrix()
+    }
 
-## Integrate with your tools
+    class Room {
+        -int roomID
+        -String roomName
+        -Object[] iObjects
+        -String[] objectNames
+        +getiObjects()
+        +getObjectNames()
+        +getRoomName()
+    }
 
-- [ ] [Set up project integrations](https://csgitlab.reading.ac.uk/rj010448/cs1op-cw1/-/settings/integrations)
+    class RoomFactory {
+        +createRoomList(int[][], String[]): Room[]
+    }
 
-## Collaborate with your team
+    class Object {
+        -int localObjectID
+        -int state
+        +getState()
+        +getLocalObjectID()
+        +setLocalObjectID(int)
+        +interact(GraphicalUserInterface, int)
+        +getObjectName()
+        +getCurrentPlayer()
+        +Up()
+        +Left()
+        +Down()
+        +Right()
+        +LInteract()
+        +RInteract()
+    }
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+    class Locker
+    class Reactor
+    class Merchant
+    class Partner
+    class Shelf
+    class HydroponicsBasin
+    class Bulkhead
+    class Command
 
-## Test and Deploy
+    Object <|-- Locker
+    Object <|-- Reactor
+    Object <|-- Merchant
+    Object <|-- Partner
+    Object <|-- Shelf
+    Object <|-- HydroponicsBasin
+    Object <|-- Bulkhead
+    Object <|-- Command
 
-Use the built-in continuous integration in GitLab.
+    RoomFactory ..> Room
+    Room ..> Object
+    Location ..> Room
+    GraphicalUserInterface ..> Location
+    GraphicalUserInterface ..> Room
+    GraphicalUserInterface ..> Game
+    Game --> Log
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+    class ManualEventFilter
+    class P1CustomEventFilter
+    class P2CustomEventFilter
 
-***
+    GraphicalUserInterface ..> ManualEventFilter
+    GraphicalUserInterface ..> P1CustomEventFilter
+    GraphicalUserInterface ..> P2CustomEventFilter
 
-# Editing this README
+## Assumptions
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+1. Java is installed.
+2. Their computer can run JavaFX.
+3. The storage space required can be accessed.
+4. They have the ability to run the .bat file to start the program.
+5. User can use a Command Line Interface.
+6. User has a keyboard or an input device acting as a keyboard.
