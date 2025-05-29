@@ -27,7 +27,7 @@ Event Filters: Separate classes for handling keyboard input for each player in b
 
 ## Getting Started
 Download All Associated: All the files can be found in this git repository.  
-Run the Game: Find the cs1op-cw1.bat file and double-click.  
+Run the Game: Find the SubText Shortcut (links directly to cs1op-cw1 batch file), which can be moved as well, and double-click.  
 Choose CLI or GUI: Decide between a simpler Command Line Interface or the more complex GUI.  
 Explore and Play: Whichever way you decide, the controls are the same. Look below for controls.  
 
