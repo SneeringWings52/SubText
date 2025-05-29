@@ -34,7 +34,7 @@ public class Location {
      */
     private void setup(String filename) {
         try {
-            Scanner locFile = new Scanner(Path.of("src\\main\\java\\com\\cw1\\Locations\\"+ filename));
+            Scanner locFile = new Scanner(Path.of("src\\main\\resources\\com\\cw1\\Locations\\"+ filename));
             this.locName = locFile.nextLine().replace(":"," ");
             int numOfRooms = locFile.nextInt();
             int[][] roomSetup = new int[numOfRooms][0];

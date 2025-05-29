@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 import javafx.geometry.Rectangle2D;
 import java.util.*;
 
+import com.cw1.EventFilters.ManualEventFilter;
+import com.cw1.EventFilters.P1CustomEventFilter;
+import com.cw1.EventFilters.P2CustomEventFilter;
+
 import javafx.scene.text.TextAlignment;
 
 /**

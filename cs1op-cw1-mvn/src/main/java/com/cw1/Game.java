@@ -3,6 +3,8 @@ package com.cw1;
 import javafx.scene.control.Label;
 import java.util.*;
 
+import com.cw1.Objects.Object;
+
 /**
  * Main Game class that manages game state, player actions, locations, rooms, and logging.
  * Implements singleton pattern to ensure only one instance exists.

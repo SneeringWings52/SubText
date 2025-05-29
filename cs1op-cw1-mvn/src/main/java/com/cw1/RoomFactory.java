@@ -1,5 +1,22 @@
 package com.cw1;
 
+import com.cw1.Objects.AmaltheaQuestDesk;
+import com.cw1.Objects.AmaltheaQuestLocker;
+import com.cw1.Objects.Bed;
+import com.cw1.Objects.Bulkhead;
+import com.cw1.Objects.Command;
+import com.cw1.Objects.ConamaraMerchant;
+import com.cw1.Objects.FlowerMerchant;
+import com.cw1.Objects.HydroponicsBasin;
+import com.cw1.Objects.JohannesMerchant;
+import com.cw1.Objects.Locker;
+import com.cw1.Objects.Merchant;
+import com.cw1.Objects.Object;
+import com.cw1.Objects.Partner;
+import com.cw1.Objects.Reactor;
+import com.cw1.Objects.Shelf;
+import com.cw1.Objects.Window;
+
 /**
  * Factory class for creating Room objects and their interactive objects.
  * Converts integer IDs from location data into specific object instances.

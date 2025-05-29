@@ -1,5 +1,7 @@
 package com.cw1;
 
+import com.cw1.Objects.Object;
+
 /**
  * Represents a room within a location in the game.
  * Each room contains interactive objects and a name.
