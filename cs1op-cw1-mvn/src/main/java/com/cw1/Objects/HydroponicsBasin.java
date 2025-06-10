@@ -84,6 +84,7 @@ public class HydroponicsBasin extends Object {
             // If the quest is accepted, give the item and update state
             if (Game.getInstance().getQuestAccepted()[0] == true) {
                 Game.getInstance().setItems(0, this.currentPlayer);
+                Game.getInstance().getLog().addLogEntry("ITEMTulips from Hydroponics Basin", this.currentPlayer);
                 this.dialouge = "You steal the tulips,\nhopefully your partner doesn't find out.";
                 this.state = 1;
             } else {

@@ -14,13 +14,13 @@ public class Log{
     public void addLogEntry(String message, int player) {
         // Print different log messages based on the action keyword in the message
         if (message.startsWith("INTERACT")) {
-            System.out.println("Log: Player " + player + " interacted with object: " + message.substring(9));
+            System.out.println("Log: Player " + player + " interacted with object: " + message.substring(8));
         } else if (message.startsWith("QUEST")) {
-            System.out.println("Log: Player " + player + " accepted quest: " + message.substring(6));
+            System.out.println("Log: Player " + player + " accepted quest: " + message.substring(5));
         } else if (message.startsWith("ITEM")) {
-            System.out.println("Log: Player " + player + " picked up item: " + message.substring(5));
+            System.out.println("Log: Player " + player + " picked up item: " + message.substring(4));
         } else if (message.startsWith("MOVE")) {
-            System.out.println("Log: Player " + player + " moved players to location: " + message.substring(5));
+            System.out.println("Log: Player " + player + " moved players to location: " + message.substring(4));
         } else {
             System.out.println("Log: Player " + player + ": " + message);
         }

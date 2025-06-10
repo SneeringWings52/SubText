@@ -52,8 +52,8 @@ public class Partner extends Object {
             span = 3;
             choices = new String[0];
         }
-        // If player has the flowers (item 3), update dialogue and remove choices
-        if (Game.getInstance().getItems()[3] != 0) {
+        // If player has the flowers (item 0), update dialogue and remove choices
+        if (Game.getInstance().getItems()[0] != 0) {
             this.dialouge = "Thank you so much,\nI really appreciate these flowers.";
             choices = new String[0];
         }
