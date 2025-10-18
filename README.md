@@ -1,6 +1,5 @@
 Module Code:  CS1OP  
-Assignment report Title:   Project  
-Student Number (e.g. 25098635): 33010448  
+Assignment report Title:   SubText
 Actual hrs spent for the assignment: 58  
 Which Artificial Intelligence tools used: Github Co-Pilot in VsCode
 
